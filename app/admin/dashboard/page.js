@@ -7,7 +7,9 @@ import {
   FaImages, 
   FaPhone, 
   FaEdit,
-  FaChartLine
+  FaChartLine,
+  FaCogs,
+  FaBullhorn
 } from 'react-icons/fa'
 import Link from 'next/link'
 
@@ -34,6 +36,16 @@ export default function AdminDashboard() {
       count: '1 item'
     },
     {
+      title: 'Our Services',
+      icon: FaCogs,
+      description: 'Manage school services',
+      link: '/admin/dashboard/services',
+      color: 'from-orange-500 to-orange-600',
+      bgColor: 'bg-orange-50',
+      textColor: 'text-orange-600',
+      count: 'Multiple items'
+    },
+    {
       title: 'Admissions',
       icon: FaUserGraduate,
       description: 'Manage admission process',
@@ -51,6 +63,16 @@ export default function AdminDashboard() {
       color: 'from-pink-500 to-pink-600',
       bgColor: 'bg-pink-50',
       textColor: 'text-pink-600',
+      count: 'Multiple items'
+    },
+    {
+      title: 'Notices',
+      icon: FaBullhorn,
+      description: 'Manage school notices',
+      link: '/admin/dashboard/notice',
+      color: 'from-yellow-500 to-yellow-600',
+      bgColor: 'bg-yellow-50',
+      textColor: 'text-yellow-600',
       count: 'Multiple items'
     },
     {

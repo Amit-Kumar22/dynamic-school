@@ -55,16 +55,16 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 section-container text-center text-white mt-16">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-up drop-shadow-lg">
+      <div className="relative z-10 section-container text-center text-white mt-12">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 animate-slide-up drop-shadow-lg">
           {hero?.title || 'Welcome to Our School'}
         </h1>
-        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-slide-up drop-shadow-md">
+        <p className="text-lg md:text-xl mb-6 max-w-2xl mx-auto animate-slide-up drop-shadow-md">
           {hero?.subtitle || 'Empowering minds, shaping futures'}
         </p>
         <a
           href={hero?.ctaLink || '#about'}
-          className="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 animate-slide-up"
+          className="inline-flex items-center gap-2 bg-white text-primary-600 px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 animate-slide-up"
         >
           {hero?.ctaText || 'Learn More'}
           <FaArrowRight className="text-sm" />

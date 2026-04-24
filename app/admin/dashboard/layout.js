@@ -15,7 +15,9 @@ import {
   FaGraduationCap,
   FaUser,
   FaChevronDown,
-  FaTachometerAlt
+  FaTachometerAlt,
+  FaBell,
+  FaCogs
 } from 'react-icons/fa'
 import Link from 'next/link'
 
@@ -69,10 +71,22 @@ export default function AdminDashboardLayout({ children }) {
       color: 'text-green-600'
     },
     {
+      title: 'Our Services',
+      icon: FaCogs,
+      link: '/admin/dashboard/services',
+      color: 'text-teal-600'
+    },
+    {
       title: 'Admissions',
       icon: FaUserGraduate,
       link: '/admin/dashboard/admissions',
       color: 'text-purple-600'
+    },
+    {
+      title: 'Notice Management',
+      icon: FaBell,
+      link: '/admin/dashboard/notice',
+      color: 'text-orange-600'
     },
     {
       title: 'Gallery',

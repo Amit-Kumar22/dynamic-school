@@ -29,23 +29,23 @@ export default function Gallery() {
   return (
     <section id="gallery" className="section-padding bg-white">
       <div className="section-container">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
             Our Gallery
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-2">
+          <p className="text-base text-gray-600 max-w-xl mx-auto mb-2">
             Explore memorable moments from our school
           </p>
-          <div className="w-20 h-1 bg-primary-600 mx-auto rounded-full" />
+          <div className="w-16 h-0.5 bg-primary-600 mx-auto rounded-full" />
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 selectedCategory === category
                   ? 'bg-primary-600 text-white shadow-lg scale-105'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -66,11 +66,11 @@ export default function Gallery() {
             <p className="text-gray-500 text-lg">No images found in this category.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
             {gallery.map((item) => (
               <div
                 key={item._id}
-                className="group relative aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                className="group relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 {/* Image */}
                 <img
@@ -81,15 +81,15 @@ export default function Gallery() {
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-white font-semibold text-lg mb-1">
+                  <div className="absolute bottom-0 left-0 right-0 p-2">
+                    <h3 className="text-white font-semibold text-sm mb-0.5 line-clamp-1">
                       {item.title}
                     </h3>
-                    <p className="text-primary-300 text-sm font-medium">
+                    <p className="text-primary-300 text-xs font-medium">
                       {item.category}
                     </p>
                     {item.description && (
-                      <p className="text-gray-300 text-sm mt-2">
+                      <p className="text-gray-300 text-xs mt-1 line-clamp-2">
                         {item.description}
                       </p>
                     )}
@@ -97,7 +97,7 @@ export default function Gallery() {
                 </div>
 
                 {/* Category Badge */}
-                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-primary-600">
+                <div className="absolute top-1 right-1 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-xs font-semibold text-primary-600">
                   {item.category}
                 </div>
               </div>

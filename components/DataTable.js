@@ -12,6 +12,10 @@ export default function DataTable({
   const [sortColumn, setSortColumn] = useState(null)
   const [sortDirection, setSortDirection] = useState('asc')
 
+  // Check if we have custom columns with actions or need default actions
+  const hasCustomActions = columns.some(col => col.header === 'Actions')
+  const shouldShowDefaultActions = !hasCustomActions && (onEdit || onDelete)
+
   const handleSort = (columnKey) => {
     if (sortColumn === columnKey) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
@@ -56,52 +60,60 @@ export default function DataTable({
             <tr>
               {columns.map((column) => (
                 <th
-                  key={column.key}
+                  key={column.accessor || column.key}
                   className={`px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider ${
                     column.sortable ? 'cursor-pointer hover:bg-gray-100 select-none' : ''
                   }`}
-                  onClick={() => column.sortable && handleSort(column.key)}
+                  onClick={() => column.sortable && handleSort(column.accessor || column.key)}
                   style={{ width: column.width }}
                 >
                   <div className="flex items-center gap-2">
-                    {column.label}
+                    {column.header || column.label}
                     {column.sortable && (
-                      <span className="text-xs">{getSortIcon(column.key)}</span>
+                      <span className="text-xs">{getSortIcon(column.accessor || column.key)}</span>
                     )}
                   </div>
                 </th>
               ))}
-              <th className="px-4 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider" style={{ width: '150px' }}>
-                Actions
-              </th>
+              {shouldShowDefaultActions && (
+                <th className="px-4 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider" style={{ width: '150px' }}>
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {sortedData.map((row) => (
               <tr key={row._id} className="hover:bg-gray-50 transition-colors">
                 {columns.map((column) => (
-                  <td key={column.key} className="px-4 py-3 text-sm text-gray-900">
-                    {column.render ? column.render(row) : row[column.key]}
+                  <td key={column.accessor || column.key} className="px-4 py-3 text-sm text-gray-900">
+                    {column.cell ? column.cell(row) : (column.render ? column.render(row) : row[column.accessor || column.key])}
                   </td>
                 ))}
-                <td className="px-4 py-3 text-sm text-right">
-                  <div className="flex items-center justify-end gap-2">
-                    <button
-                      onClick={() => onEdit(row)}
-                      className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 text-xs font-medium flex items-center gap-1 transition-colors"
-                      title="Edit"
-                    >
-                      <FaEdit className="text-xs" /> Edit
-                    </button>
-                    <button
-                      onClick={() => onDelete(row._id)}
-                      className="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 text-xs font-medium transition-colors"
-                      title="Delete"
-                    >
-                      <FaTrash className="text-xs" />
-                    </button>
-                  </div>
-                </td>
+                {shouldShowDefaultActions && (
+                  <td className="px-4 py-3 text-sm text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      {onEdit && (
+                        <button
+                          onClick={() => onEdit(row)}
+                          className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 text-xs font-medium flex items-center gap-1 transition-colors"
+                          title="Edit"
+                        >
+                          <FaEdit className="text-xs" /> Edit
+                        </button>
+                      )}
+                      {onDelete && (
+                        <button
+                          onClick={() => onDelete(row._id)}
+                          className="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 text-xs font-medium transition-colors"
+                          title="Delete"
+                        >
+                          <FaTrash className="text-xs" />
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

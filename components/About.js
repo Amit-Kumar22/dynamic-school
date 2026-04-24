@@ -35,17 +35,17 @@ export default function About() {
   return (
     <section id="about" className="section-padding bg-white">
       <div className="section-container">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
             {about?.title || 'About Our School'}
           </h2>
-          <div className="w-20 h-1 bg-primary-600 mx-auto rounded-full" />
+          <div className="w-16 h-0.5 bg-primary-600 mx-auto rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-6 items-center">
           {/* Image */}
           <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+            <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
               {about?.image ? (
                 <img
                   src={about.image}
@@ -54,43 +54,43 @@ export default function About() {
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-                  <span className="text-primary-600 text-lg">School Image</span>
+                  <span className="text-primary-600 text-base">School Image</span>
                 </div>
               )}
             </div>
             {/* Decorative element */}
-            <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full bg-primary-100 rounded-2xl" />
+            <div className="absolute -z-10 -bottom-2 -right-2 w-full h-full bg-primary-100 rounded-lg opacity-60" />
           </div>
 
           {/* Content */}
           <div>
-            <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+            <p className="text-gray-700 text-base mb-4 leading-relaxed">
               {about?.description}
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Mission */}
-              <div className="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-xl">
+              <div className="bg-gradient-to-r from-primary-50 to-blue-50 p-4 rounded-lg">
                 <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                    <FaCheck className="text-white" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                    <FaCheck className="text-white text-sm" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Our Mission</h3>
-                    <p className="text-gray-700">{about?.mission}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Our Mission</h3>
+                    <p className="text-gray-700 text-sm">{about?.mission}</p>
                   </div>
                 </div>
               </div>
 
               {/* Vision */}
-              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl">
+              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg">
                 <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
-                    <FaCheck className="text-white" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                    <FaCheck className="text-white text-sm" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Our Vision</h3>
-                    <p className="text-gray-700">{about?.vision}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Our Vision</h3>
+                    <p className="text-gray-700 text-sm">{about?.vision}</p>
                   </div>
                 </div>
               </div>
@@ -98,16 +98,16 @@ export default function About() {
 
             {/* Stats */}
             {about?.stats && about.stats.length > 0 && (
-              <div className="grid grid-cols-3 gap-4 mt-8">
+              <div className="grid grid-cols-3 gap-2 mt-4">
                 {about.stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="bg-white border-2 border-primary-100 rounded-xl p-4 text-center hover:border-primary-300 transition-colors"
+                    className="bg-white border-2 border-primary-100 rounded-lg p-2 text-center hover:border-primary-300 transition-colors"
                   >
-                    <div className="text-3xl font-bold text-primary-600 mb-1">
+                    <div className="text-xl font-bold text-primary-600 mb-0.5">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                    <div className="text-xs text-gray-600">{stat.label}</div>
                   </div>
                 ))}
               </div>

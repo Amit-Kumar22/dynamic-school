@@ -20,6 +20,7 @@ export default function Navbar() {
     { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
     { name: 'Admissions', href: '#admissions' },
+    { name: 'Notices', href: '#notices' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Contact', href: '#contact' },
   ]
@@ -27,30 +28,30 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg py-3' : 'bg-white/95 backdrop-blur-sm py-4'
+        scrolled ? 'bg-white shadow-lg py-2' : 'bg-white/95 backdrop-blur-sm py-3'
       }`}
     >
       <div className="section-container">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-primary-600">
+          <Link href="/" className="text-xl font-bold text-primary-600">
             Our School
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 text-sm"
               >
                 {link.name}
               </a>
             ))}
             <Link
               href="/admin"
-              className="btn btn-primary text-sm"
+              className="btn btn-primary"
             >
               Admin Login
             </Link>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { login } from '@/lib/api'
 import { setAuthToken } from '@/utils/auth'
 import { FaEnvelope, FaLock, FaGraduationCap, FaShieldAlt } from 'react-icons/fa'
@@ -120,16 +121,27 @@ export default function AdminLoginPage() {
           </div>
 
           {/* Card Footer */}
-          <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-center">
-            <a 
-              href="/" 
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+          <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-center space-y-3">
+            <Link 
+              href="/admin/register" 
+              className="inline-flex items-center gap-2 text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
               </svg>
-              Back to Website
-            </a>
+              Need an admin account? Register here
+            </Link>
+            <div>
+              <a 
+                href="/" 
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Website
+              </a>
+            </div>
           </div>
         </div>
 
