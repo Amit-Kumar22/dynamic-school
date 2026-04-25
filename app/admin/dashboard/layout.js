@@ -17,7 +17,10 @@ import {
   FaChevronDown,
   FaTachometerAlt,
   FaBell,
-  FaCogs
+  FaCogs,
+  FaClock,
+  FaExclamationTriangle,
+  FaBuilding
 } from 'react-icons/fa'
 import Link from 'next/link'
 
@@ -77,6 +80,12 @@ export default function AdminDashboardLayout({ children }) {
       color: 'text-teal-600'
     },
     {
+      title: 'Facilities',
+      icon: FaBuilding,
+      link: '/admin/dashboard/facilities',
+      color: 'text-purple-600'
+    },
+    {
       title: 'Admissions',
       icon: FaUserGraduate,
       link: '/admin/dashboard/admissions',
@@ -87,6 +96,18 @@ export default function AdminDashboardLayout({ children }) {
       icon: FaBell,
       link: '/admin/dashboard/notice',
       color: 'text-orange-600'
+    },
+    {
+      title: 'Important Notice',
+      icon: FaExclamationTriangle,
+      link: '/admin/dashboard/important-notice',
+      color: 'text-yellow-600'
+    },
+    {
+      title: 'School Timing',
+      icon: FaClock,
+      link: '/admin/dashboard/school-timing',
+      color: 'text-red-600'
     },
     {
       title: 'Gallery',
@@ -246,7 +267,7 @@ export default function AdminDashboardLayout({ children }) {
         </header>
 
         {/* Page Content */}
-        <main className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+        <main className="p-3 sm:p-4 lg:p-6 xl:p-8 bg-gray-50 min-h-screen">
           {children}
         </main>
       </div>

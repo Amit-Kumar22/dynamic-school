@@ -59,64 +59,96 @@ export default function Notice() {
 
   return (
     <>
-      <section id="notices" className="section-padding bg-gray-50">
-        <div className="section-container">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              Latest Notices
-            </h2>
-            <p className="text-base text-gray-600 max-w-xl mx-auto mb-2">
-              Stay updated with our latest announcements and important information
+      <section id="notices" className="section-padding bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-10 right-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-10 left-10 w-24 h-24 bg-red-200/30 rounded-full blur-2xl animate-float" />
+        
+        <div className="section-container relative">
+          <div className="text-center mb-8 animate-bounce-in">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-xl flex items-center justify-center shadow-xl animate-float">
+                <FaBell className="text-xl text-white" />
+              </div>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+                <span className="gradient-text-warm">Latest Notices</span>
+              </h2>
+            </div>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-red-500 to-orange-600 mx-auto rounded-full mb-3" />
+            <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Stay updated with our latest announcements, important information, and school events
             </p>
-            <div className="w-16 h-0.5 bg-primary-600 mx-auto rounded-full" />
           </div>
 
-          {/* Notices */}
+          {/* Enhanced Notices */}
           {notices.length === 0 ? (
-            <div className="text-center py-8">
-              <FaBell className="text-4xl text-gray-300 mx-auto mb-3" />
-              <h3 className="text-lg font-medium text-gray-500 mb-2">No Notices Available</h3>
-              <p className="text-gray-400">Check back later for important updates and announcements.</p>
+            <div className="text-center py-12 animate-bounce-in">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-orange-500 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                <FaBell className="text-2xl text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">No Notices Available</h3>
+              <p className="text-base text-gray-600">Check back later for important updates and announcements.</p>
             </div>
           ) : (
             <div className="grid gap-4 max-w-4xl mx-auto">
-              {notices.map((notice) => (
+              {notices.map((notice, index) => (
                 <div
                   key={notice._id}
-                  className="card p-4 hover:shadow-lg transition-all duration-300 border-l-4 border-primary-500 cursor-pointer hover:scale-[1.02]"
+                  className="card-elevated group cursor-pointer border-l-4 border-gradient-to-b from-red-500 to-orange-600 animate-slide-up"
+                  style={{animationDelay: `${index * 0.1}s`}}
                   onClick={() => handleNoticeClick(notice)}
                 >
-                  <div className="flex gap-4">
-                    {/* Image */}
-                    {notice.imageUrl && (
-                      <div className="flex-shrink-0">
-                        <img
-                          src={notice.imageUrl}
-                          alt={notice.title}
-                          className="w-20 h-20 object-cover rounded-lg"
-                          onError={handleImageError}
-                        />
-                      </div>
-                    )}
-                    
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FaBell className="text-primary-600 text-sm flex-shrink-0" />
-                        <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
-                          {notice.title}
-                        </h3>
-                      </div>
-                      
-                      {notice.description && (
-                        <p className="text-gray-700 text-sm mb-3 line-clamp-2">
-                          {notice.description}
-                        </p>
+                  <div className="p-4">
+                    <div className="flex gap-4">
+                      {/* Enhanced Image */}
+                      {notice.imageUrl && (
+                        <div className="flex-shrink-0">
+                          <div className="relative w-20 h-20 rounded-xl overflow-hidden shadow-lg">
+                            <Image
+                              src={notice.imageUrl}
+                              alt={notice.title || 'Notice Image'}
+                              fill
+                              className="object-cover group-hover:scale-110 transition-transform duration-300"
+                              quality={75}
+                              loading="lazy"
+                              sizes="80px"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none'
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                          </div>
+                        </div>
                       )}
                       
-                      <div className="flex items-center gap-1 text-gray-500 text-xs">
-                        <FaCalendar className="text-xs" />
-                        <span>{formatDate(notice.date)}</span>
+                      {/* Enhanced Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start gap-2 mb-2">
+                          <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <FaBell className="text-white text-sm" />
+                          </div>
+                          <h3 className="text-lg font-bold text-gray-900 line-clamp-2 group-hover:text-red-600 transition-colors duration-300">
+                            {notice.title}
+                          </h3>
+                        </div>
+                        
+                        {notice.description && (
+                          <p className="text-gray-700 text-sm mb-3 line-clamp-2 leading-relaxed">
+                            {notice.description}
+                          </p>
+                        )}
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2 text-gray-500">
+                            <div className="w-6 h-6 bg-gray-100 rounded-lg flex items-center justify-center">
+                              <FaCalendar className="text-xs text-gray-600" />
+                            </div>
+                            <span className="text-sm font-medium">{formatDate(notice.date)}</span>
+                          </div>
+                          <div className="text-sm text-red-600 font-semibold group-hover:text-orange-600 transition-colors duration-300">
+                            Read More →
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -125,10 +157,10 @@ export default function Notice() {
             </div>
           )}
           
-          {/* View All Link */}
+          {/* Enhanced View All Link */}
           {notices.length > 0 && (
-            <div className="text-center mt-6">
-              <button className="btn btn-secondary">
+            <div className="text-center mt-8 animate-slide-up" style={{animationDelay: '0.6s'}}>
+              <button className="btn btn-accent">
                 View All Notices
               </button>
             </div>
@@ -136,53 +168,65 @@ export default function Notice() {
         </div>
       </section>
 
-      {/* Notice Detail Modal */}
+      {/* Enhanced Notice Detail Modal */}
       {showModal && selectedNotice && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="card-glass max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-bounce-in">
             <div className="relative">
-              {/* Close Button */}
+              {/* Enhanced Close Button */}
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 z-10"
+                className="absolute top-3 right-3 w-10 h-10 bg-gradient-to-br from-red-500 to-orange-600 text-white rounded-lg shadow-lg flex items-center justify-center hover:from-red-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-110 z-10"
               >
                 <FaTimes />
               </button>
 
-              {/* Modal Content */}
+              {/* Enhanced Modal Content */}
               <div className="p-6">
-                {/* Image */}
+                {/* Enhanced Image */}
                 {selectedNotice.imageUrl && (
                   <div className="mb-6">
-                    <img
-                      src={selectedNotice.imageUrl}
-                      alt={selectedNotice.title}
-                      className="w-full h-64 object-cover rounded-lg"
-                      onError={handleImageError}
-                    />
+                    <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-xl">
+                      <Image
+                        src={selectedNotice.imageUrl}
+                        alt={selectedNotice.title || 'Notice Image'}
+                        fill
+                        className="object-cover"
+                        quality={90}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none'
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                    </div>
                   </div>
                 )}
 
-                {/* Title & Date */}
+                {/* Enhanced Title & Date */}
                 <div className="mb-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <FaBell className="text-primary-600" />
-                    <h2 className="text-2xl font-bold text-gray-900">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-xl flex items-center justify-center shadow-xl">
+                      <FaBell className="text-white text-lg" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900 gradient-text-warm">
                       {selectedNotice.title}
                     </h2>
                   </div>
-                  <div className="flex items-center gap-1 text-gray-500 text-sm">
-                    <FaCalendar className="text-xs" />
-                    <span>{formatDate(selectedNotice.date)}</span>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <FaCalendar className="text-gray-500" />
+                    </div>
+                    <span className="text-base font-medium">{formatDate(selectedNotice.date)}</span>
                   </div>
                 </div>
 
-                {/* Description */}
+                {/* Enhanced Description */}
                 {selectedNotice.description && (
                   <div className="prose max-w-none">
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    <div className="text-gray-700 text-base leading-relaxed whitespace-pre-line p-4 bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-sm border border-gray-100">
                       {selectedNotice.description}
-                    </p>
+                    </div>
                   </div>
                 )}
               </div>

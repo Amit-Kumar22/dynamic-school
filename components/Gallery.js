@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { getGallery } from '@/lib/api'
 
 export default function Gallery() {
@@ -73,10 +74,17 @@ export default function Gallery() {
                 className="group relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 {/* Image */}
-                <img
-                  src={item.image || '/placeholder.jpg'}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                <Image
+                  src={item.image || '/placeholder.svg'}
+                  alt={item.title || 'Gallery Image'}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  quality={85}
+                  loading="lazy"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                  onError={(e) => {
+                    e.currentTarget.src = '/placeholder.svg'
+                  }}
                 />
 
                 {/* Overlay */}
